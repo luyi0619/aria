@@ -1,0 +1,19 @@
+sudo: require
+language: generic
+compiler: gcc
+dist: xenial
+
+before_install:
+  # C++14
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update -qq
+
+install:
+  - sudo apt-get install make cmake libjemalloc-dev libboost-dev libgoogle-glog-dev
+  # C++14
+  - sudo apt-get install -qq g++-5
+  # g++ should call g++-5
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+  
+script:
+- ./compile.sh
